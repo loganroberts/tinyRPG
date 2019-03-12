@@ -7,9 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C8147477223300EB00FCE476 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8147476223300EB00FCE476 /* Extensions.swift */; };
+		C814747B223314E200FCE476 /* MovementComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C814747A223314E200FCE476 /* MovementComponent.swift */; };
+		C83167B22231582100584C0B /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83167B12231582100584C0B /* Character.swift */; };
+		C83167B52231583B00584C0B /* MapGen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83167B42231583B00584C0B /* MapGen.swift */; };
+		C83167BA2232CEEB00584C0B /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83167B92232CEEB00584C0B /* SpriteComponent.swift */; };
+		C874AA762238050D00FA152F /* BottomMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874AA752238050D00FA152F /* BottomMenu.swift */; };
+		C874AA7822380E8100FA152F /* TopMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874AA7722380E8000FA152F /* TopMenu.swift */; };
+		C874AA7B2238277200FA152F /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874AA7A2238277200FA152F /* StateMachine.swift */; };
+		C874AA7E2238439A00FA152F /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874AA7D2238439A00FA152F /* Weapon.swift */; };
+		C874AA80223843BD00FA152F /* Armor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874AA7F223843BD00FA152F /* Armor.swift */; };
+		C874AA82223843CB00FA152F /* AttackMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874AA81223843CB00FA152F /* AttackMove.swift */; };
+		C874AA842238441000FA152F /* ExperienceComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874AA832238441000FA152F /* ExperienceComponent.swift */; };
+		C874AA862238445A00FA152F /* HealthComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874AA852238445A00FA152F /* HealthComponent.swift */; };
+		C874AA88223848B600FA152F /* InventoryComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874AA87223848B600FA152F /* InventoryComponent.swift */; };
 		C87F7DB8223157420055E617 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87F7DB7223157420055E617 /* AppDelegate.swift */; };
 		C87F7DBA223157420055E617 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C87F7DB9223157420055E617 /* GameScene.sks */; };
-		C87F7DBC223157420055E617 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = C87F7DBB223157420055E617 /* Actions.sks */; };
 		C87F7DBE223157420055E617 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87F7DBD223157420055E617 /* GameScene.swift */; };
 		C87F7DC0223157420055E617 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87F7DBF223157420055E617 /* GameViewController.swift */; };
 		C87F7DC3223157420055E617 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C87F7DC1223157420055E617 /* Main.storyboard */; };
@@ -18,10 +31,24 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C8147476223300EB00FCE476 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		C814747A223314E200FCE476 /* MovementComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementComponent.swift; sourceTree = "<group>"; };
+		C83167B12231582100584C0B /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		C83167B42231583B00584C0B /* MapGen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapGen.swift; sourceTree = "<group>"; };
+		C83167B7223159A500584C0B /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		C83167B92232CEEB00584C0B /* SpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
+		C874AA752238050D00FA152F /* BottomMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMenu.swift; sourceTree = "<group>"; };
+		C874AA7722380E8000FA152F /* TopMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMenu.swift; sourceTree = "<group>"; };
+		C874AA7A2238277200FA152F /* StateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
+		C874AA7D2238439A00FA152F /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
+		C874AA7F223843BD00FA152F /* Armor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Armor.swift; sourceTree = "<group>"; };
+		C874AA81223843CB00FA152F /* AttackMove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackMove.swift; sourceTree = "<group>"; };
+		C874AA832238441000FA152F /* ExperienceComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceComponent.swift; sourceTree = "<group>"; };
+		C874AA852238445A00FA152F /* HealthComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthComponent.swift; sourceTree = "<group>"; };
+		C874AA87223848B600FA152F /* InventoryComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryComponent.swift; sourceTree = "<group>"; };
 		C87F7DB4223157420055E617 /* tinyRPG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tinyRPG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C87F7DB7223157420055E617 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C87F7DB9223157420055E617 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		C87F7DBB223157420055E617 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		C87F7DBD223157420055E617 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		C87F7DBF223157420055E617 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		C87F7DC2223157420055E617 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -41,6 +68,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C83167B32231582600584C0B /* Character */ = {
+			isa = PBXGroup;
+			children = (
+				C83167B12231582100584C0B /* Character.swift */,
+				C83167B82232CEDE00584C0B /* CharacterComponents */,
+			);
+			path = Character;
+			sourceTree = "<group>";
+		};
+		C83167B62231583E00584C0B /* World */ = {
+			isa = PBXGroup;
+			children = (
+				C874AA7A2238277200FA152F /* StateMachine.swift */,
+				C83167B42231583B00584C0B /* MapGen.swift */,
+			);
+			path = World;
+			sourceTree = "<group>";
+		};
+		C83167B82232CEDE00584C0B /* CharacterComponents */ = {
+			isa = PBXGroup;
+			children = (
+				C83167B92232CEEB00584C0B /* SpriteComponent.swift */,
+				C814747A223314E200FCE476 /* MovementComponent.swift */,
+				C874AA832238441000FA152F /* ExperienceComponent.swift */,
+				C874AA852238445A00FA152F /* HealthComponent.swift */,
+				C874AA87223848B600FA152F /* InventoryComponent.swift */,
+			);
+			path = CharacterComponents;
+			sourceTree = "<group>";
+		};
+		C874AA792238275A00FA152F /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				C874AA752238050D00FA152F /* BottomMenu.swift */,
+				C874AA7722380E8000FA152F /* TopMenu.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		C874AA7C2238435200FA152F /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				C874AA7D2238439A00FA152F /* Weapon.swift */,
+				C874AA7F223843BD00FA152F /* Armor.swift */,
+				C874AA81223843CB00FA152F /* AttackMove.swift */,
+			);
+			path = Items;
+			sourceTree = "<group>";
+		};
 		C87F7DAB223157420055E617 = {
 			isa = PBXGroup;
 			children = (
@@ -60,17 +136,30 @@
 		C87F7DB6223157420055E617 /* tinyRPG */ = {
 			isa = PBXGroup;
 			children = (
-				C87F7DB7223157420055E617 /* AppDelegate.swift */,
-				C87F7DB9223157420055E617 /* GameScene.sks */,
-				C87F7DBB223157420055E617 /* Actions.sks */,
-				C87F7DBD223157420055E617 /* GameScene.swift */,
+				C83167B7223159A500584C0B /* MyPlayground.playground */,
 				C87F7DBF223157420055E617 /* GameViewController.swift */,
-				C87F7DC1223157420055E617 /* Main.storyboard */,
+				C87F7DBD223157420055E617 /* GameScene.swift */,
+				C874AA792238275A00FA152F /* Interface */,
+				C83167B32231582600584C0B /* Character */,
+				C874AA7C2238435200FA152F /* Items */,
+				C83167B62231583E00584C0B /* World */,
+				C87F7DD12231578C0055E617 /* Support */,
+			);
+			path = tinyRPG;
+			sourceTree = "<group>";
+		};
+		C87F7DD12231578C0055E617 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				C8147476223300EB00FCE476 /* Extensions.swift */,
+				C87F7DB7223157420055E617 /* AppDelegate.swift */,
 				C87F7DC4223157440055E617 /* Assets.xcassets */,
+				C87F7DB9223157420055E617 /* GameScene.sks */,
+				C87F7DC1223157420055E617 /* Main.storyboard */,
 				C87F7DC6223157440055E617 /* LaunchScreen.storyboard */,
 				C87F7DC9223157440055E617 /* Info.plist */,
 			);
-			path = tinyRPG;
+			path = Support;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,7 +224,6 @@
 				C87F7DBA223157420055E617 /* GameScene.sks in Resources */,
 				C87F7DC5223157440055E617 /* Assets.xcassets in Resources */,
 				C87F7DC8223157440055E617 /* LaunchScreen.storyboard in Resources */,
-				C87F7DBC223157420055E617 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,9 +234,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C874AA7822380E8100FA152F /* TopMenu.swift in Sources */,
+				C874AA88223848B600FA152F /* InventoryComponent.swift in Sources */,
+				C814747B223314E200FCE476 /* MovementComponent.swift in Sources */,
 				C87F7DBE223157420055E617 /* GameScene.swift in Sources */,
+				C83167B52231583B00584C0B /* MapGen.swift in Sources */,
 				C87F7DC0223157420055E617 /* GameViewController.swift in Sources */,
+				C874AA7E2238439A00FA152F /* Weapon.swift in Sources */,
 				C87F7DB8223157420055E617 /* AppDelegate.swift in Sources */,
+				C874AA842238441000FA152F /* ExperienceComponent.swift in Sources */,
+				C874AA7B2238277200FA152F /* StateMachine.swift in Sources */,
+				C874AA862238445A00FA152F /* HealthComponent.swift in Sources */,
+				C83167BA2232CEEB00584C0B /* SpriteComponent.swift in Sources */,
+				C874AA762238050D00FA152F /* BottomMenu.swift in Sources */,
+				C874AA82223843CB00FA152F /* AttackMove.swift in Sources */,
+				C83167B22231582100584C0B /* Character.swift in Sources */,
+				C874AA80223843BD00FA152F /* Armor.swift in Sources */,
+				C8147477223300EB00FCE476 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,7 +398,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4CJPA6ZPGD;
-				INFOPLIST_FILE = tinyRPG/Info.plist;
+				INFOPLIST_FILE = tinyRPG/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -314,7 +416,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4CJPA6ZPGD;
-				INFOPLIST_FILE = tinyRPG/Info.plist;
+				INFOPLIST_FILE = tinyRPG/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
