@@ -251,11 +251,11 @@ class MovementComponent: GKComponent {
     
     func highlightMoves(moves: [(Int, Int)]) {
         clearMoveMap()
-        let movesMapNode = SKTileMapNode(tileSet: map.tileSet, columns: map.columns, rows: map.rows, tileSize: CGSize(width: 125, height: 144))
+        let movesMapNode = SKTileMapNode(tileSet: map.tileSet!, columns: map.columns, rows: map.rows, tileSize: CGSize(width: 125, height: 144))
         movesMapNode.zPosition = 2
         movesMapNode.name = "movesMapNode"
         for move in moves {
-            movesMapNode.setTileGroup(map.blank, forColumn: move.0, row: move.1)
+            movesMapNode.setTileGroup(map.tileSet!.tileGroups.first( where: { $0.name == "blank"}), forColumn: move.0, row: move.1)
         }
         movesMap.addChild(movesMapNode)
     }

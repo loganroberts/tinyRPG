@@ -42,38 +42,8 @@ class MapGen {
         persistence: 0.8,
         lacunarity: 1.5,
         seed: Int32(arc4random_uniform(5000 - 1))))
-
-   
- //   p.userData = NSMutableDictionary(dictionary: ["cost": 1])
     
-    // all tile groups for terrain
-    lazy var blankDef = SKTileDefinition(texture: SKTexture(imageNamed: "blank"))
-    lazy var beachDef = SKTileDefinition(texture: SKTexture(imageNamed: "beach"))
-    lazy var desertDef = SKTileDefinition(texture: SKTexture(imageNamed: "desert"))
-    lazy var forestDef = SKTileDefinition(texture: SKTexture(imageNamed: "forest"))
-    lazy var grassDef = SKTileDefinition(texture: SKTexture(imageNamed: "grass"))
-    lazy var mountainDef = SKTileDefinition(texture: SKTexture(imageNamed: "mountain"))
-    lazy var mountainForestDef = SKTileDefinition(texture: SKTexture(imageNamed: "mountainForest"))
-    lazy var mountainSnowDef = SKTileDefinition(texture: SKTexture(imageNamed: "mountainSnow"))
-    lazy var oceanDef = SKTileDefinition(texture: SKTexture(imageNamed: "ocean"))
-    lazy var rainForestDef = SKTileDefinition(texture: SKTexture(imageNamed: "rainForest"))
-    lazy var snowDef = SKTileDefinition(texture: SKTexture(imageNamed: "snow"))
-    lazy var taigaDef = SKTileDefinition(texture: SKTexture(imageNamed: "taiga"))
-
-    lazy var blank = SKTileGroup(tileDefinition: blankDef)
-    lazy var beach = SKTileGroup(tileDefinition: beachDef)
-    lazy var desert = SKTileGroup(tileDefinition: desertDef)
-    lazy var forest = SKTileGroup(tileDefinition: forestDef)
-    lazy var grass = SKTileGroup(tileDefinition: grassDef)
-    lazy var mountain = SKTileGroup(tileDefinition: mountainDef)
-    lazy var mountainForest = SKTileGroup(tileDefinition: mountainForestDef)
-    lazy var mountainSnow = SKTileGroup(tileDefinition: mountainSnowDef)
-    lazy var ocean = SKTileGroup(tileDefinition: oceanDef)
-    lazy var rainForest = SKTileGroup(tileDefinition: rainForestDef)
-    lazy var snow = SKTileGroup(tileDefinition: snowDef)
-    lazy var taiga = SKTileGroup(tileDefinition: taigaDef)
-    
-    var tileSet = SKTileSet()
+    var tileSet = SKTileSet(named: "Terrain")
     
     // tileMap setup
     var tileMap: SKTileMapNode
@@ -87,25 +57,11 @@ class MapGen {
         self.columns = columns
         self.rows = rows
         
-        self.tileMap = SKTileMapNode(tileSet: tileSet, columns: columns, rows: rows, tileSize: CGSize(width: 125, height: 144))
+        self.tileMap = SKTileMapNode(tileSet: tileSet!, columns: columns, rows: rows, tileSize: CGSize(width: 125, height: 144))
 
         heightNoise.clamp(lowerBound: -0.1, upperBound: 1.0)
         heightNoise.raiseToPower(4)
-        blankDef.userData = NSMutableDictionary(dictionary: ["cost": 0])
-        beachDef.userData = NSMutableDictionary(dictionary: ["cost": 1])
-        desertDef.userData = NSMutableDictionary(dictionary: ["cost": 1])
-        forestDef.userData = NSMutableDictionary(dictionary: ["cost": 2])
-        grassDef.userData = NSMutableDictionary(dictionary: ["cost": 1])
-        mountainDef.userData = NSMutableDictionary(dictionary: ["cost": 3])
-        mountainForestDef.userData = NSMutableDictionary(dictionary: ["cost": 3])
-        mountainSnowDef.userData = NSMutableDictionary(dictionary: ["cost": 3])
-        oceanDef.userData = NSMutableDictionary(dictionary: ["cost": 5])
-        rainForestDef.userData = NSMutableDictionary(dictionary: ["cost": 2])
-        snowDef.userData = NSMutableDictionary(dictionary: ["cost": 1])
-        taigaDef.userData = NSMutableDictionary(dictionary: ["cost": 1])
         
-        
-        self.tileSet = SKTileSet(tileGroups: [blank, beach, desert, forest, grass, mountain, mountainForest, mountainSnow, ocean, rainForest, snow, taiga], tileSetType: .hexagonalPointy)
         self.tileMap = createMap(columns: columns, rows: rows)
         
     }
@@ -192,7 +148,7 @@ class MapGen {
         let elevationMap = GKNoiseMap(heightNoise)
         let moistureMap = GKNoiseMap(moistureNoise)
         
-        let map = SKTileMapNode(tileSet: tileSet, columns: columns, rows: rows, tileSize: CGSize(width: 125, height: 144))
+        let map = SKTileMapNode(tileSet: tileSet!, columns: columns, rows: rows, tileSize: CGSize(width: 125, height: 144))
         
         for column in 0 ..< columns {
             for row in 0 ..< rows {
@@ -201,29 +157,29 @@ class MapGen {
                 
                 switch tileBiome {
                 case .Ocean:
-                    map.setTileGroup(ocean, forColumn: column, row: row)
+                    map.setTileGroup(map.tileSet.tileGroups.first( where: { $0.name == "ocean"}), forColumn: column, row: row)
                 case .Beach:
-                    map.setTileGroup(beach, forColumn: column, row: row)
+                    map.setTileGroup(map.tileSet.tileGroups.first( where: { $0.name == "beach"}), forColumn: column, row: row)
                 case .Grassland:
-                    map.setTileGroup(grass, forColumn: column, row: row)
+                    map.setTileGroup(map.tileSet.tileGroups.first( where: { $0.name == "grass"}), forColumn: column, row: row)
                 case .Forest:
-                    map.setTileGroup(forest, forColumn: column, row: row)
+                    map.setTileGroup(map.tileSet.tileGroups.first( where: { $0.name == "forest"}), forColumn: column, row: row)
                 case .Rainforest:
-                    map.setTileGroup(rainForest, forColumn: column, row: row)
+                    map.setTileGroup(map.tileSet.tileGroups.first( where: { $0.name == "rainForest"}), forColumn: column, row: row)
                 case .Desert:
-                    map.setTileGroup(desert, forColumn: column, row: row)
+                    map.setTileGroup(map.tileSet.tileGroups.first( where: { $0.name == "desert"}), forColumn: column, row: row)
                 case .Mountain:
-                    map.setTileGroup(mountain, forColumn: column, row: row)
+                    map.setTileGroup(map.tileSet.tileGroups.first( where: { $0.name == "mountain"}), forColumn: column, row: row)
                 case .MountainSnow:
-                    map.setTileGroup(mountainSnow, forColumn: column, row: row)
+                    map.setTileGroup(map.tileSet.tileGroups.first( where: { $0.name == "mountainSnow"}), forColumn: column, row: row)
                 case .MountainForest:
-                    map.setTileGroup(mountainForest, forColumn: column, row: row)
+                    map.setTileGroup(map.tileSet.tileGroups.first( where: { $0.name == "mountainForest"}), forColumn: column, row: row)
                 case .Snow:
-                    map.setTileGroup(snow, forColumn: column, row: row)
+                    map.setTileGroup(map.tileSet.tileGroups.first( where: { $0.name == "snow"}), forColumn: column, row: row)
                 case .Taiga:
-                    map.setTileGroup(taiga, forColumn: column, row: row)
+                    map.setTileGroup(map.tileSet.tileGroups.first( where: { $0.name == "taiga"}), forColumn: column, row: row)
                 case .Blank:
-                    map.setTileGroup(blank, forColumn: column, row: row)
+                    map.setTileGroup(map.tileSet.tileGroups.first( where: { $0.name == "blank"}), forColumn: column, row: row)
                 }
                 
             }
