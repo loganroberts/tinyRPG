@@ -23,6 +23,8 @@ class Character: GKEntity {
     lazy var experience = ExperienceSystem(owner: self)
     // health system for damage
     lazy var health = HealthComponent(owner: self)
+    //inventory for items and weapons
+    lazy var inventory = InventoryComponent(owner: self)
     
     init(texture: SKTexture, map: MapGen) {
         self.worldMap = map
@@ -34,6 +36,7 @@ class Character: GKEntity {
         addComponent(experience)
         addComponent(movement)
         addComponent(sprite)
+        addComponent(inventory)
     }
     
     required init?(coder aDecoder: NSCoder) {

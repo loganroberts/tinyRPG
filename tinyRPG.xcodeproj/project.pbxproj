@@ -29,6 +29,8 @@
 		C87F7DC5223157440055E617 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C87F7DC4223157440055E617 /* Assets.xcassets */; };
 		C87F7DC8223157440055E617 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C87F7DC6223157440055E617 /* LaunchScreen.storyboard */; };
 		C8857791223935DD0092CAF5 /* Terrain.sks in Resources */ = {isa = PBXBuildFile; fileRef = C885778F223935DD0092CAF5 /* Terrain.sks */; };
+		C885779622393FCC0092CAF5 /* GameData.plist in Resources */ = {isa = PBXBuildFile; fileRef = C885779522393FCC0092CAF5 /* GameData.plist */; };
+		C885779C22394EA10092CAF5 /* InventoryMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C885779B22394EA10092CAF5 /* InventoryMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +59,8 @@
 		C87F7DC7223157440055E617 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C87F7DC9223157440055E617 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C885778F223935DD0092CAF5 /* Terrain.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Terrain.sks; sourceTree = "<group>"; };
+		C885779522393FCC0092CAF5 /* GameData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GameData.plist; sourceTree = "<group>"; };
+		C885779B22394EA10092CAF5 /* InventoryMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,7 @@
 			children = (
 				C874AA752238050D00FA152F /* BottomMenu.swift */,
 				C874AA7722380E8000FA152F /* TopMenu.swift */,
+				C885779B22394EA10092CAF5 /* InventoryMenu.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -161,6 +166,7 @@
 				C87F7DC1223157420055E617 /* Main.storyboard */,
 				C87F7DC6223157440055E617 /* LaunchScreen.storyboard */,
 				C87F7DC9223157440055E617 /* Info.plist */,
+				C885779522393FCC0092CAF5 /* GameData.plist */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -223,6 +229,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C885779622393FCC0092CAF5 /* GameData.plist in Resources */,
 				C87F7DC3223157420055E617 /* Main.storyboard in Resources */,
 				C87F7DBA223157420055E617 /* GameScene.sks in Resources */,
 				C87F7DC5223157440055E617 /* Assets.xcassets in Resources */,
@@ -253,6 +260,7 @@
 				C874AA762238050D00FA152F /* BottomMenu.swift in Sources */,
 				C874AA82223843CB00FA152F /* AttackMove.swift in Sources */,
 				C83167B22231582100584C0B /* Character.swift in Sources */,
+				C885779C22394EA10092CAF5 /* InventoryMenu.swift in Sources */,
 				C874AA80223843BD00FA152F /* Armor.swift in Sources */,
 				C8147477223300EB00FCE476 /* Extensions.swift in Sources */,
 			);

@@ -33,6 +33,8 @@ class GameScene: SKScene {
     let pinchGesture = UIPinchGestureRecognizer()
     
     var gameState: GKStateMachine!
+    
+    let gameData = getDefaults(name: "GameData")
     //Helper character for testing. DO NOT REFERENCe
     lazy var character = Character(texture: SKTexture(imageNamed: "hero"), map: map)
     
@@ -41,6 +43,9 @@ class GameScene: SKScene {
         entities.append(character)
         addChild(map.tileMap)
         addChild(character.sprite.node)
+        character.inventory.addWeapon(weapon: Weapon(data: (gameData["Weapons"] as! Dictionary<String, Any>)["Hands"] as! Dictionary<String, Any>))
+        character.inventory.addWeapon(weapon: Weapon(data: (gameData["Weapons"] as! Dictionary<String, Any>)["Stick"] as! Dictionary<String, Any>))
+
     }
     
     //Sets up gestures and camera in scene
@@ -171,18 +176,21 @@ class GameScene: SKScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
             self.touchUp(atPoint: t.location(in: self))
-            let nodeAtTouch = cam?.atPoint(t.location(in: cam!))
+            let nodeAtTouch = cam?.atPoint(t.location(in: self))
+           
             switch nodeAtTouch?.name {
             case "button1":
                 cam?.position = character.sprite.node.position
             case "button2":
-                print("Found Button 2")
+                cam?.addChild(InventoryMenu(owner: character))
             case "button3":
                 print("Found Button 3")
             case "button4":
                 gameState.enter(GameTurn.self)
+            case "InventoryMenu":
+                print("Inventory Touched")
             default:
-                print("")
+                (cam?.childNode(withName: "InventoryMenu")?.removeFromParent())
             }
             
         }

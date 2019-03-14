@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Armor</key>
+	<dict>
+		<key>Clothes</key>
+		<dict>
+			<key>Name</key>
+			<string>Clothes</string>
+			<key>ArmorSlot</key>
+			<string>Body</string>
+			<key>Defense</key>
+			<integer>1</integer>
+			<key>Speed</key>
+			<integer>2</integer>
+			<key>Weight</key>
+			<integer>0</integer>
+			<key>Value</key>
+			<integer>0</integer>
+			<key>Sellable</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>Weapons</key>
+	<dict>
+		<key>Hands</key>
+		<dict>
+			<key>Name</key>
+			<string>Hands</string>
+			<key>WeaponType</key>
+			<string>Melee</string>
+			<key>Accuracy</key>
+			<integer>100</integer>
+			<key>Move</key>
+			<string>Punch</string>
+			<key>Damage</key>
+			<integer>1</integer>
+			<key>Weight</key>
+			<integer>0</integer>
+			<key>Value</key>
+			<integer>0</integer>
+			<key>Sellable</key>
+			<false/>
+		</dict>
+		<key>Stick</key>
+		<dict>
+			<key>Name</key>
+			<string>Stick</string>
+			<key>WeaponType</key>
+			<string>Melee</string>
+			<key>Accuracy</key>
+			<integer>100</integer>
+			<key>Move</key>
+			<string>Punch</string>
+			<key>Damage</key>
+			<integer>1</integer>
+			<key>Weight</key>
+			<integer>0</integer>
+			<key>Value</key>
+			<integer>0</integer>
+			<key>Sellable</key>
+			<false/>
+		</dict>
+	</dict>
+</dict>
+</plist>
