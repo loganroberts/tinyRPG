@@ -24,6 +24,9 @@ class InventoryComponent: GKComponent {
     var handsSlot: Armor? = nil
     
     var gold = 0
+    var wood = 0
+    var stone = 0
+    var food = 0
     
     init(owner: Character) {
         self.owner = owner

@@ -20,6 +20,7 @@ class SpriteComponent: GKComponent {
         node.position = CGPoint(x: 0, y: 0)
         node.scale(to: CGSize(width: 100, height: 100))
         node.zPosition = 1
+        node.name = "PlayerSprite"
     }
     
     required init?(coder aDecoder: NSCoder) {

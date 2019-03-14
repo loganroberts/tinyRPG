@@ -20,67 +20,68 @@ class GameScene: SKScene {
     let map = MapGen(columns: 64, rows: 64)
 
     var previousCameraPoint = CGPoint.zero
-    var previousCameraScale = CGFloat()
-    
-    let maxZoom = CGFloat(2.0)
-    let minZoom = CGFloat(1.0)
-    var lastZoom = CGFloat(1.0)
-    
-    var cameraDeltaX = Double()
-    var cameraDeltaY = Double()
     
     let panGesture = UIPanGestureRecognizer()
-    let pinchGesture = UIPinchGestureRecognizer()
     
     var gameState: GKStateMachine!
     
     let gameData = getDefaults(name: "GameData")
-    //Helper character for testing. DO NOT REFERENCe
+    //Helper character for testing. DO NOT REFERENCE
     lazy var character = Character(texture: SKTexture(imageNamed: "hero"), map: map)
     
+    let statMenu = StatMenu(name: "Stats")
+    let actionMenu = ActionMenu(name: "Actions")
+    
     override func sceneDidLoad() {
+        //setup game state
+        gameState = GKStateMachine(states: [PlayerTurn(game: self, player: character), GameTurn()])
+        gameState.enter(PlayerTurn.self)
         
         entities.append(character)
+        
         addChild(map.tileMap)
+        character.sprite.node.zPosition = 999
         addChild(character.sprite.node)
-        character.inventory.addWeapon(weapon: Weapon(data: (gameData["Weapons"] as! Dictionary<String, Any>)["Hands"] as! Dictionary<String, Any>))
-        character.inventory.addWeapon(weapon: Weapon(data: (gameData["Weapons"] as! Dictionary<String, Any>)["Stick"] as! Dictionary<String, Any>))
-
+        
     }
     
     //Sets up gestures and camera in scene
     override func didMove(to view: SKView) {
-        
+        //pan around the map
         panGesture.addTarget(self, action: #selector(panGestureAction(_:)))
-        pinchGesture.addTarget(self, action: #selector(handlePinchGesture(sender:)))
-      
         view.addGestureRecognizer(panGesture)
-        view.addGestureRecognizer(pinchGesture)
-        
+      
+      
         //setup camera
         cam = SKCameraNode()
-        
         self.camera = cam
         self.addChild(cam!)
-        let bottomMenu = BottomMenu()
-        let topMenu = TopMenu()
-        bottomMenu.position = CGPoint(x: 0, y: -570)
-        topMenu.position = CGPoint(x: 0, y: 640)
         
-        cam?.addChild(bottomMenu)
-        cam?.addChild(topMenu)
+        //menus
+        statMenu.position = CGPoint(x: 0, y: 620)
+        cam?.addChild(statMenu)
         
+        actionMenu.zPosition = 1000
+        actionMenu.isHidden = true
+    
+        cam?.addChild(actionMenu)
+        
+        //set player to middle of current tile on map
         let playerPosition = character.movement.getOffsetLocation(point: character.sprite.node.position)
         character.sprite.node.position = map.tileMap.centerOfTile(atColumn: playerPosition.0, row: playerPosition.1)
         character.movement.currentLocation = playerPosition
         
+        //sets camera to focus on player
         cam!.position = character.sprite.node.position
+        
+    }
+    
+    func showMovesMap(point: CGPoint) {
+        //setups up the initial moves map - will move once a menu button is set for "move" action
+        let playerPosition = character.movement.getOffsetLocation(point: point)
         let moves = character.movement.getRange(from: playerPosition)
         character.movement.highlightMoves(moves: moves)
         addChild(character.movement.movesMap)
-        
-        gameState = GKStateMachine(states: [PlayerTurn(game: self, player: character), GameTurn()])
-        gameState.enter(PlayerTurn.self)
     }
     
     //Allows for panning around the map
@@ -99,49 +100,11 @@ class GameScene: SKScene {
             y: previousCameraPoint.y + translation.y
         )
         camera.position = newPosition
-        
     }
-    
-    //allows for zooming
-    @objc func handlePinchGesture(sender: UIPinchGestureRecognizer) {
-        guard let camera = self.camera else { return }
-        
-        if sender.state == .began {
-            previousCameraScale = camera.xScale
-        }
-        
-        if sender.state == .changed {
-            switch (previousCameraScale * 1 / sender.scale) {
-            case 1.0 ... 3.0:
-                camera.setScale(previousCameraScale * 1 / sender.scale)
-            case ..<1.0:
-                camera.setScale(1.0)
-            case 3.0...:
-                camera.setScale(3.0)
-            default:
-                print("SKCamera Scale Broken")
-            }
-            
-            if (previousCameraScale * 1 / sender.scale) > 3.0 {
-                camera.setScale(3.0)
-                lastZoom = 3.0
-            } else if (previousCameraScale * 1 / sender.scale) < 1.0 {
-                camera.setScale(1.0)
-                lastZoom = 1.0
-            } else {
-                camera.setScale(previousCameraScale * 1 / sender.scale)
-                lastZoom = (previousCameraScale * 1 / sender.scale)
-            }
-        }
-        
-        
-        
-    }
-    
+
     
     func touchDown(atPoint pos : CGPoint) {
-        
-        
+
     }
     
     func touchMoved(toPoint pos : CGPoint) {
@@ -153,47 +116,68 @@ class GameScene: SKScene {
         let moveToTile = SKAction.move(to: destination, duration: 0.25)
         if character.movement.moved == true {
             cam?.run(moveToTile)
+            character.sprite.node.run(moveToTile)
+            showMovesMap(point: destination)
+            character.movement.moved = false
         }
-        
-        character.sprite.node.run(moveToTile)
-        
-        let playerPosition = character.movement.getOffsetLocation(point: destination)
-        let moves = character.movement.getRange(from: playerPosition)
-        character.movement.highlightMoves(moves: moves)
-        character.movement.moved = false
-        addChild(character.movement.movesMap)
-       
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
+        
+        
+        for t in touches {
+            self.touchDown(atPoint: t.location(in: self))
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
+        for t in touches {
+            //detect force touch
+            let maxForce = t.maximumPossibleForce
+            let force = t.force
+            let normalizedForce = force / maxForce
+            
+            let location = t.location(in: self)
+            let node = self.atPoint(location)
+            
+            if normalizedForce >= 0.75 && node.name == "PlayerSprite" {
+                actionMenu.isHidden = false
+            }
+
+            self.touchMoved(toPoint: t.location(in: self))
+            
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches {
-            self.touchUp(atPoint: t.location(in: self))
-            let nodeAtTouch = cam?.atPoint(t.location(in: self))
-           
-            switch nodeAtTouch?.name {
-            case "button1":
-                cam?.position = character.sprite.node.position
-            case "button2":
-                cam?.addChild(InventoryMenu(owner: character))
-            case "button3":
-                print("Found Button 3")
-            case "button4":
+        
+        let location = touches.first!.location(in: self)
+        let node = self.atPoint(location)
+        
+        if node.parent is ActionMenu {
+            switch node.name {
+            case "MoveButton":
+                showMovesMap(point: character.sprite.node.position)
+                actionMenu.isHidden = true
+            case "EndTurn":
                 gameState.enter(GameTurn.self)
-            case "InventoryMenu":
-                print("Inventory Touched")
+                actionMenu.isHidden = true
+            case "TileAction":
+                print("Tile Action Button Pushed")
+                actionMenu.isHidden = true
+            case "Inventory":
+                print("Inventory Button Pushed")
+                actionMenu.isHidden = true
             default:
-                (cam?.childNode(withName: "InventoryMenu")?.removeFromParent())
+                print(node.name ?? "NO Name")
             }
-            
+        } else {
+            if actionMenu.isHidden {
+                self.touchUp(atPoint: location)
+            }
+            actionMenu.isHidden = true
         }
+        
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -205,19 +189,16 @@ class GameScene: SKScene {
         if gameState.currentState is GameTurn {
             gameState.enter(PlayerTurn.self)
         }
+        
         //If moving happened, add the new tileMap to the scene and set the camera position and end the pan gesture
-        if map.updateMap(point: camera?.position ?? CGPoint(x: 0.0, y: 0.0), zoom: lastZoom) == true {
+        if map.updateMap(point: camera?.position ?? CGPoint(x: 0.0, y: 0.0), zoom: 1.0) == true {
             self.addChild(map.tileMap)
             camera?.position = map.getTileCenter(point: CGPoint(x: 0.0, y: 0.0), inMap: map.tileMap)
             panGesture.cancel()
         }
+
+        statMenu.update(character: character)
         
-        //moves the character to the camera center. this will be removed once player movement is independent
-        
-        character.update(deltaTime: currentTime)
-        
-        (cam?.childNode(withName: "TopMenu") as! TopMenu).levelLabel.text = "Level: \(character.experience.level)"
-        (cam?.childNode(withName: "TopMenu") as! TopMenu).healthLabel.text = "HP: \(character.health.current)"
     }
 
 }

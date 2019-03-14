@@ -23,6 +23,8 @@ class Character: GKEntity {
     lazy var experience = ExperienceSystem(owner: self)
     // health system for damage
     lazy var health = HealthComponent(owner: self)
+    //magic system for spells
+    lazy var magic = MagicComponent(owner: self)
     //inventory for items and weapons
     lazy var inventory = InventoryComponent(owner: self)
     
@@ -32,6 +34,7 @@ class Character: GKEntity {
         self.movement = MovementComponent(map: worldMap)
         super.init()
         
+        addComponent(magic)
         addComponent(health)
         addComponent(experience)
         addComponent(movement)
