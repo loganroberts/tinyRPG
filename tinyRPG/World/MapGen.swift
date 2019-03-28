@@ -25,6 +25,7 @@ class MapGen {
         case MountainForest
         case Snow
         case Blank
+        case River
     }
     
     
@@ -71,6 +72,14 @@ class MapGen {
      If no movement, does nothing. Returns bool back to the GameScene for use in the Update()
      function.
      */
+    
+    func isRiver() -> Bool {
+        let num = arc4random_uniform(5000-1)
+        guard num > 4900 else {
+            return false
+        }
+        return true
+    }
     
     func updateMap(point: CGPoint, zoom: CGFloat) -> Bool {
         var modified = false
@@ -174,6 +183,8 @@ class MapGen {
                     map.setTileGroup(map.tileSet.tileGroups.first( where: { $0.name == "mountainSnow"}), forColumn: column, row: row)
                 case .MountainForest:
                     map.setTileGroup(map.tileSet.tileGroups.first( where: { $0.name == "mountainForest"}), forColumn: column, row: row)
+                case .River:
+                    map.setTileGroup(map.tileSet.tileGroups.first( where: { $0.name == "water"}), forColumn: column, row: row)
                 case .Snow:
                     map.setTileGroup(map.tileSet.tileGroups.first( where: { $0.name == "snow"}), forColumn: column, row: row)
                 case .Taiga:
@@ -184,7 +195,8 @@ class MapGen {
                 
             }
         }
-        return map
+        let newMap = generateRiverSource(dryMap: map)
+        return newMap
     }
 
     // Get the elevation and compare against a moisture map for biome generation and return the Biome for tilemap creation
@@ -212,7 +224,11 @@ class MapGen {
             case -0.5 ... 0.25:
                 biome =  .Forest
             case 0.25 ... 1.0:
-                biome =  .Rainforest
+                if isRiver() {
+                biome =  .River
+                } else {
+                    biome =  .Rainforest
+                }
             default:
                 print("Tropical Biome outside range")
                 biome =  .Blank
@@ -227,7 +243,11 @@ class MapGen {
             case -0.5 ... 0.0:
                 biome =  .Grassland
             case 0.0 ... 1.0:
-                biome =  .Forest
+                if isRiver() {
+                    biome =  .River
+                } else {
+                    biome =  .Forest
+                }
             default:
                 print("Temperate Biome outside range")
                 biome =  .Blank
@@ -255,7 +275,11 @@ class MapGen {
             case -1.0 ... -0.25:
                 biome =  .Mountain
             case -0.25 ... 0.25:
-                biome =  .MountainForest
+                if isRiver() {
+                    biome =  .River
+                } else {
+                    biome =  .MountainForest
+                }
             case 0.25 ... 1.0:
                 biome =  .MountainSnow
             default:
@@ -268,5 +292,31 @@ class MapGen {
         return biome
     }
     
+    func generateRiverSource(dryMap: SKTileMapNode) -> SKTileMapNode {
+        let map = dryMap
+        var rivers = [(Int, Int)]()
+        
+        
+        //creates the sources and then adds to the array of points
+        for column in 0...map.numberOfColumns {
+            for row in 0...map.numberOfRows {
+                let tile = map.tileDefinition(atColumn: column, row: row)
+                if ((tile?.userData?.value(forKey: "river")) != nil) {
+                    rivers.append((column, row))
+                }
 
+            }
+        }
+        
+        var index = 0
+        
+        for (i, each) in rivers.enumerated() {
+            
+            
+        }
+        
+        
+        return map
+    }
+    
 }
