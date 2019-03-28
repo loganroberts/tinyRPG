@@ -176,6 +176,8 @@ class MovementComponent: GKComponent {
         
         var results = [(Int, Int, Int)]()
         
+        let path1 = 000
+        
         for i in 0...d {
             let t = step * Double(i)
             let lerpedCube = lerp(a: aNudge, b: bNudge, t: t)
